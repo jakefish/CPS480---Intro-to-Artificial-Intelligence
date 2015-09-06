@@ -1,4 +1,2 @@
-from wow_classes import wow_classes
-
-for c in wow_classes:
-    print c.class_name
+from wow_classes import (warrior, paladin, rogue, priest, death_knight, shaman,
+                            mage, warlock, monk, druid)
