@@ -10,6 +10,7 @@ mage = WoWClass(class_name="mage", class_rank=0)
 warlock = WoWClass(class_name="warlock", class_rank=0)
 monk = WoWClass(class_name="monk", class_rank=0)
 druid = WoWClass(class_name="druid", class_rank=0)
+hunter = WoWClass(class_name="hunter", class_rank=0)
 
 wow_classes = [warrior, paladin, rogue, priest, death_knight, shaman, mage,
                 warlock, monk, druid]
