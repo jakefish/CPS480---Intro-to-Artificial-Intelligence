@@ -1,5 +1,8 @@
 from wow_classes import (warrior, paladin, rogue, priest, death_knight, shaman,
-                            mage, warlock, monk, druid, wow_classes)
+                            mage, warlock, monk, druid, hunter, wow_classes)
+                            
+from util import calculate_results
+
 
 question_one = raw_input("Are you angered easily? y/n ")
 
@@ -25,7 +28,7 @@ question_five = raw_input("Do you use others to do your dirty work? y/n ")
 
 if question_five is 'y':
     death_knight.class_rank = death_knight.class_rank + 1
-print warrior.class_rank
+
 question_six = raw_input("Do like playing with fire? y/n ")
 
 if question_six is 'y':
@@ -101,11 +104,4 @@ question_twenty = raw_input("Do you you find yourself taking the blame for somet
 if question_twenty is 'y':
     warrior.class_rank = warrior.class_rank + 1
 
-
-highest_rank = 0
-for wow_class in wow_classes:
-    if wow_class.class_rank >= highest_rank:
-        highest_rank = wow_class.class_rank
-        winning_class = wow_class.class_name
-
-print "Based on your answers you should play as a {0}".format(winning_class)
+print "Based on your answers you should play as a {0}".format(calculate_results(wow_classes))
