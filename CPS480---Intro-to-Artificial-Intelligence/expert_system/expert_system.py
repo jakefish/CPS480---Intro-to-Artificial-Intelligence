@@ -27,7 +27,7 @@ question_five = raw_input("Do you use others to do your dirty work? y/n ")
 if question_five is 'y':
     wow_classes.get('death_knight').class_rank += 1
 
-question_six = raw_input("Do like playing with fire? y/n ")
+question_six = raw_input("Do you like playing with fire? y/n ")
 
 if question_six is 'y':
     wow_classes.get('shaman').class_rank += 1
@@ -67,7 +67,7 @@ question_thirteen = raw_input("Is dominance your aim? y/n ")
 if question_thirteen is 'y':
     wow_classes.get('warlock').class_rank += 1
 
-question_fourteen = raw_input("Do you enjoy reading book? y/n ")
+question_fourteen = raw_input("Do you enjoy reading books? y/n ")
 
 if question_fourteen is 'y':
     wow_classes.get('mage').class_rank += 1
