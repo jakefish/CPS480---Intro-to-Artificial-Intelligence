@@ -12,5 +12,17 @@ monk = WoWClass(class_name="monk", class_rank=0)
 druid = WoWClass(class_name="druid", class_rank=0)
 hunter = WoWClass(class_name="hunter", class_rank=0)
 
-wow_classes = [warrior, paladin, rogue, priest, death_knight, shaman, mage,
-                warlock, monk, druid]
+#wow_classes = [warrior, paladin, rogue, priest, death_knight, shaman, mage,
+                #warlock, monk, druid]
+wow_classes = {
+        "warrior": warrior,
+        "paladin": paladin,
+        "rogue": rogue,
+        "priest": priest,
+        "death_knight" : death_knight,
+        "shaman": shaman,
+        "mage": mage,
+        "warlock": warlock,
+        "monk": monk,
+        "druid": druid
+       }
