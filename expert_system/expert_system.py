@@ -1,6 +1,4 @@
-from wow_classes import (warrior, paladin, rogue, priest, death_knight, shaman,
-                            mage, warlock, monk, druid, hunter, wow_classes)
-
+from wow_classes import wow_classes
 from util import calculate_results
 
 
@@ -102,6 +100,6 @@ if question_nineteen is 'y':
 question_twenty = raw_input("Do you you find yourself taking the blame for something you didn't do? y/n ")
 
 if question_twenty is 'y':
-    warrior.class_rank = warrior.class_rank + 1
+    wow_classes.get('warrior').class_rank += 1
 
 print "Based on your answers you should play as a {0}".format(calculate_results(wow_classes))

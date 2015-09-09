@@ -1,6 +1,6 @@
 def calculate_results(wow_classes):
 
-    """ Takes a list of WoWClass objects and determines the class that contains
+    """ Takes a dictionary of WoWClass objects and determines the class that contains
         the highest rank from the quiz.
     """
 
