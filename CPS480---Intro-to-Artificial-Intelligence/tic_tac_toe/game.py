@@ -4,8 +4,9 @@ import random
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, difficulty_level):
         self.board = [' '] * 10
+        self.difficulty_level = difficulty_level
 
     def draw_board(self):
         print('   |   |')
@@ -29,7 +30,7 @@ class Game:
             return ['O', 'X']
 
     def determine_who_plays_first(self):
-        random_player = ['Player', 'Player']
+        random_player = ['Computer', 'Player']
         return random_player[random.randint(0, 1)]
 
     def make_a_move(self, letter, move):
@@ -70,54 +71,89 @@ class Game:
         return int(move)
 
     def get_computer_move(self, computer_letter):
-        available_moves = []
+
+        #-AI-Level-0
+        if self.difficulty_level is 0:
+            finding_valid_move = True
+            while finding_valid_move:
+                computer_move = random.randint(1,9)
+                print computer_move
+                if self.check_empty_board_space(computer_move):
+                    return computer_move
+            return computer_move
+
+        #-AI-Level-1
+        elif self.difficulty_level is 1:
+            for position in range(1, 10):
+                if self.check_empty_board_space(position):
+                    self.make_a_move(computer_letter, position)
+                    if self.check_for_winner(computer_letter):
+                        print 'hit position'
+                        print position
+                        return position
+                    else:
+                        self.make_a_move(' ', position)
+                        return self.level_zero(computer_letter)
+
+        else:
+            pass
+
+
+    def level_zero(self, computer_level):
         finding_valid_move = True
         while finding_valid_move:
             computer_move = random.randint(0,9)
             if self.check_empty_board_space(computer_move):
                 finding_valid_move = False
-
         return computer_move
 
+    def check_if_board_is_full(self):
+        for position in range(1, 10):
+            if self.check_empty_board_space(position):
+                return False
+        return True
 
 
-
-
-
-game = Game()
+game = Game(0)
 player_letters = game.choose_player_letter()
-print player_letters
 player_letter = player_letters[0]
-print player_letter
 computer_letter = player_letters[1]
-first_player = game.determine_who_plays_first()
-print "{0} will make the first move".format(first_player)
-
-
+player_turn = game.determine_who_plays_first()
+print "{0} will make the first move".format(player_turn)
 game_playing = True
 
-
 while game_playing:
-    if first_player is 'Player':
+
+    if player_turn is 'Player':
 
         player_move = game.get_player_move()
         game.make_a_move(player_letter, player_move)
+        print " "
         game.draw_board()
         if game.check_for_winner(player_letter):
+            game.draw_board()
             print "Congratulations you won!"
             game_playing = False
         else:
-            first_player = 'Computer'
+            if game.check_if_board_is_full():
+                print "You have tied the game."
+                game_playing = False
+            else:
+                player_turn = 'Computer'
 
     else:
         computer_move = game.get_computer_move(computer_letter)
         game.make_a_move(computer_letter, computer_move)
-        game.get_computer_move('X')
-        game.draw_board()
+
         if game.check_for_winner(computer_letter):
             game.draw_board()
-            print('The computer has beaten you! You lose.')
+            print('You just lost to a computer...')
             gameIsPlaying = False
 
         else:
-            first_player = "Player"
+            if game.check_if_board_is_full():
+                game.draw_board()
+                print "You have tied the game."
+                game_playing = False
+            else:
+                player_turn = "Player"
