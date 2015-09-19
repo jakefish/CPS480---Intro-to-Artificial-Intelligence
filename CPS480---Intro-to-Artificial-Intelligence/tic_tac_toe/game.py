@@ -6,6 +6,7 @@ class Game:
 
     def __init__(self, difficulty_level):
         self.board = [' '] * 10
+        self.fake_board = [' '] * 10
         self.difficulty_level = difficulty_level
 
     def draw_board(self):
@@ -84,17 +85,20 @@ class Game:
 
         #-AI-Level-1
         elif self.difficulty_level is 1:
+
             for position in range(1, 10):
+                print 'Position'
+                print type(self.board)
                 if self.check_empty_board_space(position):
                     self.make_a_move(computer_letter, position)
                     if self.check_for_winner(computer_letter):
                         print 'hit position'
                         print position
                         return position
-                    else:
-                        self.make_a_move(' ', position)
-                        return self.level_zero(computer_letter)
+                    self.make_a_move(' ', position)
+            return self.level_zero(computer_letter)
 
+        #-AI-Level-2
         else:
             pass
 
@@ -114,7 +118,8 @@ class Game:
         return True
 
 
-game = Game(0)
+
+game = Game(1)
 player_letters = game.choose_player_letter()
 player_letter = player_letters[0]
 computer_letter = player_letters[1]
@@ -148,7 +153,7 @@ while game_playing:
         if game.check_for_winner(computer_letter):
             game.draw_board()
             print('You just lost to a computer...')
-            gameIsPlaying = False
+            game_playing = False
 
         else:
             if game.check_if_board_is_full():
