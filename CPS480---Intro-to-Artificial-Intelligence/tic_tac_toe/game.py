@@ -1,3 +1,7 @@
+import random
+
+
+
 class Game:
 
     def __init__(self):
@@ -25,7 +29,6 @@ class Game:
             return ['O', 'X']
 
     def determine_who_plays_first(self):
-        import random
         random_player = ['Player', 'Player']
         return random_player[random.randint(0, 1)]
 
@@ -66,6 +69,17 @@ class Game:
             move = raw_input()
         return int(move)
 
+    def get_computer_move(self, computer_letter):
+        available_moves = []
+        finding_valid_move = True
+        while finding_valid_move:
+            computer_move = random.randint(0,9)
+            if self.check_empty_board_space(computer_move):
+                finding_valid_move = False
+
+        return computer_move
+
+
 
 
 
@@ -81,18 +95,29 @@ print "{0} will make the first move".format(first_player)
 
 
 game_playing = True
+
+
 while game_playing:
     if first_player is 'Player':
 
         player_move = game.get_player_move()
         game.make_a_move(player_letter, player_move)
         game.draw_board()
-
         if game.check_for_winner(player_letter):
             print "Congratulations you won!"
             game_playing = False
-
-
+        else:
+            first_player = 'Computer'
 
     else:
-        break
+        computer_move = game.get_computer_move(computer_letter)
+        game.make_a_move(computer_letter, computer_move)
+        game.get_computer_move('X')
+        game.draw_board()
+        if game.check_for_winner(computer_letter):
+            game.draw_board()
+            print('The computer has beaten you! You lose.')
+            gameIsPlaying = False
+
+        else:
+            first_player = "Player"
