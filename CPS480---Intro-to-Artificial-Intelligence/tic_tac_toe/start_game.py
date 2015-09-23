@@ -21,6 +21,7 @@ while game_playing:
 
         player_move = game.get_player_move()
         game.make_a_move(game.player_letter, player_move)
+        print "Your move:"
         game.create_board()
         if game.check_for_winner(game.player_letter):
             game.draw_board()
@@ -36,6 +37,7 @@ while game_playing:
     else:
         computer_move = game.get_computer_move(game.computer_letter)
         game.make_a_move(game.computer_letter, computer_move)
+        print "Computer move:"
         game.create_board()
         if game.check_for_winner(game.computer_letter):
             game.create_board()

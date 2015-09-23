@@ -1,5 +1,37 @@
 import random
 
+"""
+
+A game class designed for a tic-tac-toe
+
+
+Attributes:
+
+    board:             An array with a size of 10, used to store player and computer moves
+                       and display the board to the player
+
+    difficulty_level:  Takes an integer and changes the AI difficulty_level
+                       based on the number the game is instantiated with (0, 1, or 2)
+
+    player_letter:     Stores the player's letter (X or O)
+
+    computer_letter:     Stores the computer's letter (X or O)
+
+Functions:
+    - create_board(): prints out the current state of the game board
+    - choose_player_letter(): Takes input from the user to determine which letter
+                              the computer and user will play as
+    - determine_who_plays_first(): Determines if the computer or player will start first
+    - make_a_move(): utility function used to make a move on the board
+    - check_for_winner(): Returns true if a letter, X or O has 3 in a row
+    - check_empty_board_space(): Utility function used to check for empty board positions
+    - get_player_move(): Takes user input and marks their input on the board
+    - get_computer_move(): The computer AI, makes a move based on the difficulty_level
+    - make_a_random_move(): Function for AI to make a random move
+    - check_if_board_is_full(): Checks for empty positions and returns true if there are none
+
+
+"""
 
 
 class Game:
@@ -11,6 +43,7 @@ class Game:
         self.computer_letter = ''
 
     def create_board(self):
+        print '\n'
         print('   |   |')
         print(' ' + self.board[1] + ' | ' + self.board[2] + ' | ' + self.board[3])
         print('   |   |')
@@ -22,6 +55,7 @@ class Game:
         print('   |   |')
         print(' ' + self.board[7] + ' | ' + self.board[8] + ' | ' + self.board[9])
         print('   |   |')
+        print '\n'
 
     def choose_player_letter(self):
         self.player_letter = raw_input('Which you like to play as X or O?')
