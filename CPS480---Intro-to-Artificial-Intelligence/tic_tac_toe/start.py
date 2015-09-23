@@ -2,8 +2,9 @@ from game import Game
 
 
 
-game = Game(1)
+game = Game(2)
 player_letters = game.choose_player_letter()
+game.player_letter = player_letters[0]
 player_letter = player_letters[0]
 computer_letter = player_letters[1]
 player_turn = game.determine_who_plays_first()

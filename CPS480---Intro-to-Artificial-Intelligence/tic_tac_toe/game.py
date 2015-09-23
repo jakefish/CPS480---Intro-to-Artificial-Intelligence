@@ -8,6 +8,7 @@ class Game:
         self.board = [' '] * 10
         self.fake_board = [' '] * 10
         self.difficulty_level = difficulty_level
+        self.player_letter = ''
 
     def draw_board(self):
         print('   |   |')
@@ -97,13 +98,29 @@ class Game:
 
         #-AI-Level-2
         else:
-            pass
+
+            for position in range(1, 10):
+                if self.check_empty_board_space(position):
+                    self.make_a_move(computer_letter, position)
+                    if self.check_for_winner(computer_letter):
+                        return position
+                    self.make_a_move(' ', position)
+
+            for position in range(1, 10):
+                if self.check_empty_board_space(position):
+                    self.make_a_move(self.player_letter, position)
+                    if self.check_for_winner(self.player_letter):
+                        return position
+                    self.make_a_move(' ', position)
+
+
+            return self.level_zero(computer_letter)
 
 
     def level_zero(self, computer_level):
         finding_valid_move = True
         while finding_valid_move:
-            computer_move = random.randint(0,9)
+            computer_move = random.randint(1,10)
             if self.check_empty_board_space(computer_move):
                 finding_valid_move = False
         return computer_move
