@@ -5,10 +5,10 @@ import random
 class Game:
 
     def __init__(self, difficulty_level):
-        self.board = [' '] * 10
-        self.fake_board = [' '] * 10
+        self.board = ['?', '?', '?', '?', '?', '?', '?', '?', '?', '?']
         self.difficulty_level = difficulty_level
         self.player_letter = ''
+        self.computer_letter = ''
 
     def draw_board(self):
         print('   |   |')
@@ -24,12 +24,12 @@ class Game:
         print('   |   |')
 
     def choose_player_letter(self):
-        player_letter = raw_input('Which you like to play as X or O?')
-        player_letter = player_letter.upper()
-        if player_letter == 'X':
-            return ['X', 'O']
+        self.player_letter = raw_input('Which you like to play as X or O?')
+        self.player_letter = self.player_letter.upper()
+        if self.player_letter == 'X':
+            self.computer_letter = 'O'
         else:
-            return ['O', 'X']
+            self.computer_letter = 'X'
 
     def determine_who_plays_first(self):
         random_player = ['Computer', 'Player']
@@ -62,7 +62,7 @@ class Game:
         return winner
 
     def check_empty_board_space(self, move):
-        if self.board[move] == ' ':
+        if self.board[move] == '?':
             return True
 
     def get_player_move(self):
@@ -87,13 +87,11 @@ class Game:
         #-AI-Level-1
         elif self.difficulty_level is 1:
             for position in range(1, 10):
-                print 'Position'
-                print position
                 if self.check_empty_board_space(position):
                     self.make_a_move(computer_letter, position)
                     if self.check_for_winner(computer_letter):
                         return position
-                    self.make_a_move(' ', position)
+                    self.make_a_move('?', position)
             return self.level_zero(computer_letter)
 
         #-AI-Level-2
@@ -104,14 +102,14 @@ class Game:
                     self.make_a_move(computer_letter, position)
                     if self.check_for_winner(computer_letter):
                         return position
-                    self.make_a_move(' ', position)
+                    self.make_a_move('?', position)
 
             for position in range(1, 10):
                 if self.check_empty_board_space(position):
                     self.make_a_move(self.player_letter, position)
                     if self.check_for_winner(self.player_letter):
                         return position
-                    self.make_a_move(' ', position)
+                    self.make_a_move('?', position)
 
             for position in range(1, 10):
                 if self.check_empty_board_space(position):
@@ -122,15 +120,14 @@ class Game:
                                 self.make_a_move(computer_letter, position)
                                 if self.check_for_winner(computer_letter):
                                     return position
-                                self.make_a_move(' ', position)
+                                self.make_a_move('?', position)
                         return position
-                    self.make_a_move(' ', position)
+                    self.make_a_move('?', position)
+
+            return self.make_a_random_move(computer_letter)
 
 
-            return self.level_zero(computer_letter)
-
-
-    def level_zero(self, computer_level):
+    def make_a_random_move(self, computer_level):
         finding_valid_move = True
         while finding_valid_move:
             computer_move = random.randint(1,10)
