@@ -52,7 +52,7 @@ class Game:
             winner = True
         elif self.board[7] == letter and self.board[5] == letter and self.board[3] == letter:
             winner = True
-        elif self.board[9] == letter and self.board[5] == letter and self.board[3] == letter:
+        elif self.board[3] == letter and self.board[6] == letter and self.board[9] == letter:
             winner = True
         elif self.board[1] == letter and self.board[5] == letter and self.board[9] == letter:
             winner = True
@@ -85,15 +85,12 @@ class Game:
 
         #-AI-Level-1
         elif self.difficulty_level is 1:
-
             for position in range(1, 10):
                 print 'Position'
-                print type(self.board)
+                print position
                 if self.check_empty_board_space(position):
                     self.make_a_move(computer_letter, position)
                     if self.check_for_winner(computer_letter):
-                        print 'hit position'
-                        print position
                         return position
                     self.make_a_move(' ', position)
             return self.level_zero(computer_letter)
@@ -116,49 +113,3 @@ class Game:
             if self.check_empty_board_space(position):
                 return False
         return True
-
-
-
-game = Game(1)
-player_letters = game.choose_player_letter()
-player_letter = player_letters[0]
-computer_letter = player_letters[1]
-player_turn = game.determine_who_plays_first()
-print "{0} will make the first move".format(player_turn)
-game_playing = True
-
-while game_playing:
-
-    if player_turn is 'Player':
-
-        player_move = game.get_player_move()
-        game.make_a_move(player_letter, player_move)
-        print " "
-        game.draw_board()
-        if game.check_for_winner(player_letter):
-            game.draw_board()
-            print "Congratulations you won!"
-            game_playing = False
-        else:
-            if game.check_if_board_is_full():
-                print "You have tied the game."
-                game_playing = False
-            else:
-                player_turn = 'Computer'
-
-    else:
-        computer_move = game.get_computer_move(computer_letter)
-        game.make_a_move(computer_letter, computer_move)
-
-        if game.check_for_winner(computer_letter):
-            game.draw_board()
-            print('You just lost to a computer...')
-            game_playing = False
-
-        else:
-            if game.check_if_board_is_full():
-                game.draw_board()
-                print "You have tied the game."
-                game_playing = False
-            else:
-                player_turn = "Player"
