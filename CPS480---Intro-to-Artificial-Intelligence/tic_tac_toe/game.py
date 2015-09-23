@@ -113,6 +113,19 @@ class Game:
                         return position
                     self.make_a_move(' ', position)
 
+            for position in range(1, 10):
+                if self.check_empty_board_space(position):
+                    self.make_a_move(computer_letter, position)
+                    if self.check_for_winner(computer_letter):
+                        for position in range(1, 10):
+                            if self.check_empty_board_space(position):
+                                self.make_a_move(computer_letter, position)
+                                if self.check_for_winner(computer_letter):
+                                    return position
+                                self.make_a_move(' ', position)
+                        return position
+                    self.make_a_move(' ', position)
+
 
             return self.level_zero(computer_letter)
 
