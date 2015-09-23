@@ -10,9 +10,9 @@ class Game:
         self.player_letter = ''
         self.computer_letter = ''
 
-    def draw_board(self):
+    def create_board(self):
         print('   |   |')
-        print(' ' + self.board[7] + ' | ' + self.board[8] + ' | ' + self.board[9])
+        print(' ' + self.board[1] + ' | ' + self.board[2] + ' | ' + self.board[3])
         print('   |   |')
         print('-----------')
         print('   |   |')
@@ -20,7 +20,7 @@ class Game:
         print('   |   |')
         print('-----------')
         print('   |   |')
-        print(' ' + self.board[1] + ' | ' + self.board[2] + ' | ' + self.board[3])
+        print(' ' + self.board[7] + ' | ' + self.board[8] + ' | ' + self.board[9])
         print('   |   |')
 
     def choose_player_letter(self):

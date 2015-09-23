@@ -1,5 +1,11 @@
 from game import Game
 
+"""
+
+Creates a game with a difficulty level (0, 1, or 2) assigns the player and
+computer a letter and starts the game.
+
+"""
 
 
 game = Game(2)
@@ -15,8 +21,7 @@ while game_playing:
 
         player_move = game.get_player_move()
         game.make_a_move(game.player_letter, player_move)
-        print " "
-        game.draw_board()
+        game.create_board()
         if game.check_for_winner(game.player_letter):
             game.draw_board()
             print "Congratulations you won!"
@@ -31,15 +36,15 @@ while game_playing:
     else:
         computer_move = game.get_computer_move(game.computer_letter)
         game.make_a_move(game.computer_letter, computer_move)
-        game.draw_board()
+        game.create_board()
         if game.check_for_winner(game.computer_letter):
-            game.draw_board()
+            game.create_board()
             print('You just lost to a computer...')
             game_playing = False
 
         else:
             if game.check_if_board_is_full():
-                game.draw_board()
+                game.create_board()
                 print "You have tied the game."
                 game_playing = False
             else:
