@@ -2,7 +2,12 @@ import random
 
 x = 0xffffffff
 
-def create_population(size):
+def initial_population(size):
+    """
+    Creates an initial randomly generated population based on the given
+    size.
+    """
+
     population = []
 
     for index in range(size):
@@ -10,7 +15,23 @@ def create_population(size):
 
     return population
 
-def evalutate(x):
+def decode(chromosome):
+    """
+    Takes each individual from the population and decodes their value.
+    """
+
+    first_value = chromosone & 0xff
+    second_value = (chromosone & 0xFF00) >> 8
+    third_value = (chromosone & 0xFF0000) >> 16
+    fourth_value = (chromosone & 0xFF000000) >> 24
+    
+    decoded_value = first_value + second_value + third_value + fourth_value
+
+    return decoded_value
+
+
+
+def evalutate_fitness(x):
     pass
 
 def selection(x):
@@ -21,3 +42,8 @@ def crossover(x):
 
 def mutate(x):
     pass
+
+population = initial_population(50)
+
+x = decode(population[0])
+print x
