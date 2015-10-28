@@ -20,11 +20,11 @@ def decode(chromosome):
     Takes each individual from the population and decodes their value.
     """
 
-    first_value = chromosone & 0xff
-    second_value = (chromosone & 0xFF00) >> 8
-    third_value = (chromosone & 0xFF0000) >> 16
-    fourth_value = (chromosone & 0xFF000000) >> 24
-    
+    first_value = chromosome & 0xff
+    second_value = (chromosome & 0xFF00) >> 8
+    third_value = (chromosome & 0xFF0000) >> 16
+    fourth_value = (chromosome & 0xFF000000) >> 24
+
     decoded_value = first_value + second_value + third_value + fourth_value
 
     return decoded_value
