@@ -1,6 +1,5 @@
 import random
 
-x = 0xffffffff
 
 def initial_population(size):
     """
@@ -31,8 +30,15 @@ def decode(chromosome):
 
 
 
-def evalutate_fitness(x):
-    pass
+def evalutate_fitness(population):
+
+    for individual in population:
+        curr_value = decode(individual)
+        difference = abs(curr_value - 200)
+
+
+
+
 
 def selection(x):
     pass
@@ -44,6 +50,4 @@ def mutate(x):
     pass
 
 population = initial_population(50)
-
-x = decode(population[0])
-print x
+evalutate_fitness(population)
