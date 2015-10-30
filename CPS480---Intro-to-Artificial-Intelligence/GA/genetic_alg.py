@@ -35,28 +35,33 @@ def evalutate_fitness(individual):
     """
     Returns the fitness rating of an individual from a population.
     """
-
     difference = abs(TARGET - decode(individual))
     fitness = 1000 - difference
     return fitness
 
+def crossover(mother, father):
+    first_half = mother & 0xFF00
+    second_half = father & 0xFF000000
+    child = (first_half | second_half)
+    return child
 
-def crossover(x):
-
-
-
-    pass
-
-
+def mutate(chromosome):
+    altered_bit_position = random.randrange(0, 31)
+    mutation = x ^ (1 << altered_bit_position)
+    return mutation
 
 def selection(x):
     pass
 
-def mutate(x):
-    pass
+
 
 population = initial_population(50)
+x = crossover(population[0], population[1])
+print x
+y = mutate(x)
+print bin(y)
 for individual in population:
 
     fitness = evalutate_fitness(individual)
-    print fitness
+
+    #print fitness
