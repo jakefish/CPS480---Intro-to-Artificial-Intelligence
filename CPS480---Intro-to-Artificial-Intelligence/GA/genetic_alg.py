@@ -31,15 +31,20 @@ def decode(chromosome):
 
     return decoded_value
 
-
-
 def evalutate_fitness(individual):
+    """
+    Returns the fitness rating of an individual from a population.
+    """
+
     difference = abs(TARGET - decode(individual))
     fitness = 1000 - difference
     return fitness
 
 
 def crossover(x):
+
+
+
     pass
 
 
