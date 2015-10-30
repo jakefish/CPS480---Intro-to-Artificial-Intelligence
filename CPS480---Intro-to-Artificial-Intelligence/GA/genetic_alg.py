@@ -1,6 +1,9 @@
 import random
 
 
+TARGET = 200
+
+
 def initial_population(size):
     """
     Creates an initial randomly generated population based on the given
@@ -30,24 +33,25 @@ def decode(chromosome):
 
 
 
-def evalutate_fitness(population):
+def evalutate_fitness(individual):
+    difference = abs(TARGET - decode(individual))
+    fitness = 1000 - difference
+    return fitness
 
-    for individual in population:
-        curr_value = decode(individual)
-        difference = abs(curr_value - 200)
 
-
+def crossover(x):
+    pass
 
 
 
 def selection(x):
     pass
 
-def crossover(x):
-    pass
-
 def mutate(x):
     pass
 
 population = initial_population(50)
-evalutate_fitness(population)
+for individual in population:
+
+    fitness = evalutate_fitness(individual)
+    print fitness
