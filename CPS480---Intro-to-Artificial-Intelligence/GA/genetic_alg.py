@@ -46,20 +46,33 @@ def crossover(mother, father):
     return child
 
 def mutate(chromosome):
-    altered_bit_position = random.randrange(0, 31)
+    altered_bit_position = random.randint(0, 31)
     mutation = x ^ (1 << altered_bit_position)
     return mutation
 
-def selection(x):
-    pass
+def selection(population):
+    fitness_sum = 0
+    fitness_list = []
 
+    for individual in population:
+        fitness = evalutate_fitness(individual)
+        fitness_sum += fitness
+
+    random_pick = random.randint(0, fitness_sum)
+
+    for invdiviudal in population:
+        fitness_range = evalutate_fitness(invdiviudal)
+        for fitness_level in range(fitness_range):
+            fitness_list.append(fitness_level)
+
+    return fitness_list[random_pick]
 
 
 population = initial_population(50)
 x = crossover(population[0], population[1])
-print x
 y = mutate(x)
-print bin(y)
+selection = selection(population)
+
 for individual in population:
 
     fitness = evalutate_fitness(individual)
