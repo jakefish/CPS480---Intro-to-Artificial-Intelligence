@@ -47,34 +47,41 @@ def crossover(mother, father):
 
 def mutate(chromosome):
     altered_bit_position = random.randint(0, 31)
-    mutation = x ^ (1 << altered_bit_position)
+    mutation = chromosome ^ (1 << altered_bit_position)
     return mutation
 
-def selection(population):
-    fitness_sum = 0
-    fitness_list = []
+def weighted_choice(population):
+    weight_total = sum((fitness[1] for fitness in population))
+    random_pick = random.uniform(0, weight_total)
+    for indiviudal, fitness in population:
+        if random_pick < fitness:
+            return indiviudal
+        random_pick = random_pick - fitness
+    return indiviudal
 
+def generation(MAX_GENERATIONS):
+
+    population = initial_population(50)
+    weighted_population = []
+    temp_population = []
+    for generation in range(MAX_GENERATIONS):
+        print "Generation {0}".format(generation)
+        for individual in population:
+            fitness_value = evalutate_fitness(individual)
+            weighted_population.append((individual, fitness_value))
+        mother = weighted_choice(weighted_population)
+        father = weighted_choice(weighted_population)
+        child = crossover(mother, father)
+        mutate(child)
+        population.append(child)
+
+    max_fit = evalutate_fitness(population[0])
+    max_fit_individual = population[0]
     for individual in population:
-        fitness = evalutate_fitness(individual)
-        fitness_sum += fitness
+        fitness_val = evalutate_fitness(individual)
+        if fitness_val > max_fit:
+            max_fit = fitness_val
+            max_fit_individual = individual
+    print decode(max_fit_individual)
 
-    random_pick = random.randint(0, fitness_sum)
-
-    for invdiviudal in population:
-        fitness_range = evalutate_fitness(invdiviudal)
-        for fitness_level in range(fitness_range):
-            fitness_list.append(fitness_level)
-
-    return fitness_list[random_pick]
-
-
-population = initial_population(50)
-x = crossover(population[0], population[1])
-y = mutate(x)
-selection = selection(population)
-
-for individual in population:
-
-    fitness = evalutate_fitness(individual)
-
-    #print fitness
+generation(500)
