@@ -40,9 +40,11 @@ def evalutate_fitness(individual):
     return fitness
 
 def crossover(mother, father):
-    first_half = mother & 0xFF00
-    second_half = father & 0xFF000000
-    child = (first_half | second_half)
+    crossover_rate = 1
+    if crossover_rate:
+        first_half = mother & 0xFF00
+        second_half = father & 0xFF000000
+        child = (first_half | second_half)
     return child
 
 def mutate(chromosome):
@@ -74,14 +76,21 @@ def generation(MAX_GENERATIONS):
         child = crossover(mother, father)
         mutate(child)
         population.append(child)
+        print "Average Fitness: {0}".format(calculate_average_fitness(weighted_population))
+        max_fit = evalutate_fitness(population[0])
+        max_fit_individual = population[0]
+        for individual in population:
+            fitness_val = evalutate_fitness(individual)
+            if fitness_val > max_fit:
+                max_fit = fitness_val
+                max_fit_individual = individual
+        print "Max Fitness for current generation {0}".format(max_fit)
 
-    max_fit = evalutate_fitness(population[0])
-    max_fit_individual = population[0]
-    for individual in population:
-        fitness_val = evalutate_fitness(individual)
-        if fitness_val > max_fit:
-            max_fit = fitness_val
-            max_fit_individual = individual
-    print decode(max_fit_individual)
+def calculate_average_fitness(population):
+    fitness_length = len(population)
+    total_fitness = sum((fitness[1] for fitness in population))
+    return total_fitness/fitness_length
+
+
 
 generation(500)
