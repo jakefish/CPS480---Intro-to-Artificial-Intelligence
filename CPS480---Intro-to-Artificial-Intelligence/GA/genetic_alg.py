@@ -40,6 +40,10 @@ def evalutate_fitness(individual):
     return fitness
 
 def crossover(mother, father):
+    """
+    Takes a mother and a father and splits them in two parts and merges them
+    into a child.
+    """
     crossover_rate = 1
     if crossover_rate:
         first_half = mother & 0xFF00
@@ -48,11 +52,21 @@ def crossover(mother, father):
     return child
 
 def mutate(chromosome):
+    """
+    Pick a random bit to mutate by XOR and shifting the selected bit.  This
+    ensures diversity in the population.
+    """
     altered_bit_position = random.randint(0, 31)
     mutation = chromosome ^ (1 << altered_bit_position)
     return mutation
 
 def weighted_choice(population):
+    """
+    Chooses a random element from population which is a list of tuples in the
+    form (indiviudal, fitness) and determines tthe probability of choosing the
+    respective indiviudal.
+
+    """
     weight_total = sum((fitness[1] for fitness in population))
     random_pick = random.uniform(0, weight_total)
     for indiviudal, fitness in population:
@@ -62,10 +76,12 @@ def weighted_choice(population):
     return indiviudal
 
 def generation(MAX_GENERATIONS):
-
+    """
+    Simulates all of the generations by adding indiviudals and their respected
+    fitness levels to the weighted population list.
+    """
     population = initial_population(50)
     weighted_population = []
-    temp_population = []
     for generation in range(MAX_GENERATIONS):
         print "Generation {0}".format(generation)
         for individual in population:
@@ -87,6 +103,9 @@ def generation(MAX_GENERATIONS):
         print "Max Fitness for current generation {0}".format(max_fit)
 
 def calculate_average_fitness(population):
+    """
+    Returns the average fitness in a population.
+    """
     fitness_length = len(population)
     total_fitness = sum((fitness[1] for fitness in population))
     return total_fitness/fitness_length
