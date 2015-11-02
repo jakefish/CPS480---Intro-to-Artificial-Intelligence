@@ -2,7 +2,7 @@ import random
 
 
 TARGET = 200
-
+MAX_GENERATIONS = 500
 
 def initial_population(size):
     """
@@ -112,4 +112,4 @@ def calculate_average_fitness(population):
 
 
 
-generation(500)
+generation(MAX_GENERATIONS)
